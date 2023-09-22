@@ -1,0 +1,45 @@
+{
+  "name": "@dropflow/ui",
+  "version": "1.0.0",
+  "description": "CryptoFlow Application streamlines the process of distributing cryptocurrency coins efficiently. With CryptoFlow, you can easily create and execute drop workflows to specific wallet groups.",
+  "private": true,
+  "scripts": {
+    "start": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint src "
+  },
+  "dependencies": {
+    "@data-driven-forms/mui-component-mapper": "^3.21.6",
+    "@data-driven-forms/react-form-renderer": "^3.21.6",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.9",
+    "@mui/material": "^5.14.10",
+    "@mui/x-data-grid": "^6.15.0",
+    "@refinedev/mui": "^5.13.10",
+    "@tanstack/react-query": "^4.35.3",
+    "axios": "^1.5.0",
+    "date-fns": "^2.30.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "ethers": "^6.7.1",
+    "lodash": "^4.17.21",
+    "material-ui-popup-state": "^5.0.9",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.16.0",
+    "simplebar-react": "^3.2.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.22",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
+    "@vitejs/plugin-react": "^4.0.4",
+    "eslint": "^8.50.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9"
+  }
+}

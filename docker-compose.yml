@@ -1,0 +1,49 @@
+services:
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - crypto-network
+  ui:
+    build:
+      context: ./ui
+      target: development
+    command: npm run start -- --host
+    depends_on:
+      - mongo
+    ports:
+      - 5173:5173
+    env_file:
+      - ./ui/.env.docker
+    volumes:
+      - ./ui:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - crypto-network
+  api:
+    build:
+      context: ./api
+      target: development
+    command: npm run start:dev
+    depends_on:
+      - mongo
+    ports:
+      - 3010:3000
+    env_file:
+      - ./api/.env.docker
+    volumes:
+      - ./api:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - crypto-network
+
+volumes:
+  mongo-data:
+networks:
+  crypto-network:
