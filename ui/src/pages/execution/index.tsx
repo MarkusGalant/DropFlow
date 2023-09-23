@@ -25,6 +25,7 @@ import { formatDate } from '../../utils';
 import Label from '../../components/Label';
 
 import Transaction from './transaction';
+import Price from './price';
 
 const Execution = () => {
   const { executionId } = useParams();
@@ -50,6 +51,11 @@ const Execution = () => {
       field: 'data',
       header: 'Transaction',
       renderCell: (data) => (data?.tx ? <Transaction tx={data?.tx} /> : <></>),
+    },
+    {
+      field: 'data',
+      header: 'Price',
+      renderCell: (data) => (data?.tx ? <Price tx={data.tx} /> : <></>),
     },
     {
       field: 'status',

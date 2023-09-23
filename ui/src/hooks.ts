@@ -3,6 +3,7 @@ import { JsonRpcProvider, formatUnits } from 'ethers';
 import { useRef, useState } from 'react';
 
 import {
+  getPrice,
   getNetworks,
   updateNetwork,
   getWalletGroups,
@@ -32,6 +33,14 @@ export const useBalance = (address: string, network: Network) => {
       const balance = await provider.getBalance(address);
       return formatUnits(balance, network.decimals);
     },
+  });
+};
+
+export const usePrices = () => {
+  return useQuery({
+    queryKey: ['prices'],
+    queryFn: getPrice,
+    refetchInterval: 10 * 1000,
   });
 };
 

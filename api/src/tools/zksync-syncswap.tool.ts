@@ -46,9 +46,6 @@ type ParamsType = {
     tokenOut: string;
     amount: string;
   };
-  tx: {
-    gasPrice: string;
-  };
 };
 
 @Injectable()
@@ -65,9 +62,6 @@ export class ZkSYncSyncSwapTool {
       tokenOut: 'USDC',
       amount: '0.01',
     },
-    tx: {
-      gasPrice: '200000000',
-    },
   };
 
   public ui = {
@@ -77,7 +71,6 @@ export class ZkSYncSyncSwapTool {
         value: token,
       })),
     },
-    tx: {},
   };
 
   private getProvider = async () => {
@@ -124,7 +117,7 @@ export class ZkSYncSyncSwapTool {
     outToken: string,
     amount: string,
     isNative: boolean,
-    { gasPrice }: { gasPrice: string },
+    tx: any,
   ) => {
     // The factory of the Classic Pool.
     const classicPoolFactory: Contract = new Contract(
@@ -182,9 +175,7 @@ export class ZkSYncSyncSwapTool {
       paths, // paths
       minAmountOut.toString(), // amountOutMin // Note: ensures slippage here
       deadline.toString(), // deadline // 30 minutes
-      {
-        gasPrice: BigNumber.from(gasPrice).toString(),
-      },
+      tx,
     );
 
     return response;
@@ -212,6 +203,8 @@ export class ZkSYncSyncSwapTool {
     try {
       const signer = Wallet.fromPhrase(wallet.mnemonic).connect(provider);
 
+      const fee = await provider.getFeeData();
+
       const inToken = getAddress(TOKENS[params.swap.tokenIn]);
       const outToken = getAddress(TOKENS[params.swap.tokenOut]);
       const amount = parseUnits(
@@ -227,7 +220,9 @@ export class ZkSYncSyncSwapTool {
         outToken,
         amount,
         isNative,
-        params.tx,
+        {
+          gasPrice: fee.gasPrice,
+        },
       );
 
       return {

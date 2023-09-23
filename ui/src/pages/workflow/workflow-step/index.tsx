@@ -12,7 +12,6 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import SwapField from '../../../components/ToolForm/SwapField';
-import TransactionField from '../../../components/ToolForm/TransactionField';
 import MoreActionMenu from '../../../components/MoreActionMenu';
 
 type WorkflowStepProps = {
@@ -49,10 +48,6 @@ const WorkflowStep: FC<WorkflowStepProps> = ({
             value={params.swap}
             onChange={(val) => onParamsChange({ ...params, swap: val })}
             {...ui.swap}
-          />
-          <TransactionField
-            value={params.tx}
-            onChange={(val) => onParamsChange({ ...params, tx: val })}
           />
         </Stack>
       </CardContent>

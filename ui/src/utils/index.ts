@@ -11,3 +11,13 @@ export const formatDate = (val: string) => {
 
 export const formatTx = (val: string) =>
   `${val.substr(0, 6)}...${val.substr(-4)}`;
+
+export const formatCurrency = (val: number) => {
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 6,
+  });
+
+  return formatter.format(val);
+};

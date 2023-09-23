@@ -104,9 +104,6 @@ export class Seeder {
                 tokenOut: 'USDT',
                 amount: '0.01',
               },
-              tx: {
-                gasPrice: '250000000',
-              },
             },
           },
         ],
