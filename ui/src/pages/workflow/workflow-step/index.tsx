@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 
 import {
   Card,
@@ -15,7 +15,7 @@ import SwapField from '../../../components/ToolForm/SwapField';
 import MoreActionMenu from '../../../components/MoreActionMenu';
 
 type WorkflowStepProps = {
-  title: string;
+  title: ReactNode;
   ui: any;
   params: any;
   onParamsChange: (params: any) => void;

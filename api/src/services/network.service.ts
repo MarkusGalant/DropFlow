@@ -26,12 +26,19 @@ export class NetworkService {
     return networks.map(NetworkService.mapNetwork);
   }
 
-  public async getOneByName(name: string): Promise<NetworkDto> {
+  public async getOneByChainId(chainId: number): Promise<Network> {
+    const network = await this.networkRepository.findOneOrFail({
+      where: { chainId },
+    });
+
+    return network;
+  }
+  public async getOneByName(name: string): Promise<Network> {
     const network = await this.networkRepository.findOneOrFail({
       where: { name },
     });
 
-    return NetworkService.mapNetwork(network);
+    return network;
   }
 
   public async createOne(data: CreateNetworkDto) {

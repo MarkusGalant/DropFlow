@@ -63,6 +63,7 @@ export class Seeder {
         symbol: 'ETH',
         decimals: 18,
         rpc: 'https://eth.llamarpc.com',
+        coins: [],
       },
       {
         id: createId(),
@@ -74,6 +75,53 @@ export class Seeder {
         symbol: 'ETH',
         decimals: 18,
         rpc: 'https://mainnet.era.zksync.io',
+        coins: [
+          {
+            symbol: 'ETH',
+            address: '0x5aea5775959fbc2557cc8789bc1bf90a239d9a91',
+            decimals: 18,
+          },
+          {
+            symbol: 'WETH',
+            address: '0x5aea5775959fbc2557cc8789bc1bf90a239d9a91',
+            decimals: 18,
+          },
+          {
+            symbol: 'USDC',
+            address: '0x3355df6D4c9C3035724Fd0e3914dE96A5a83aaf4',
+            decimals: 6,
+          },
+          {
+            symbol: 'USDT',
+            address: '0x493257fd37edb34451f62edf8d2a0c418852ba4c',
+            decimals: 6,
+          },
+          {
+            symbol: 'BUSD',
+            address: '0x2039bb4116b4efc145ec4f0e2ea75012d6c0f181',
+            decimals: 18,
+          },
+          {
+            symbol: 'MATIC',
+            address: '0x28a487240e4d45cff4a2980d334cc933b7483842',
+            decimals: 18,
+          },
+          {
+            symbol: 'OT',
+            address: '0xd0ea21ba66b67be636de1ec4bd9696eb8c61e9aa',
+            decimals: 18,
+          },
+          {
+            symbol: 'MAV',
+            address: '0x787c09494ec8bcb24dcaf8659e7d5d69979ee508',
+            decimals: 18,
+          },
+          {
+            symbol: 'WBTC',
+            address: '0xbbeb516fb02a01611cbbe0453fe3c580d7281011',
+            decimals: 6,
+          },
+        ],
       },
     ];
 
@@ -97,7 +145,7 @@ export class Seeder {
         steps: [
           {
             id: '1695415126761',
-            toolId: 'zksync-syncswap',
+            toolId: 'syncswap-swap-324',
             params: {
               swap: {
                 tokenIn: 'USDC',

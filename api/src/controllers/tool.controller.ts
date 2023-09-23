@@ -13,6 +13,15 @@ export class ToolController {
   @HttpCode(200)
   @ApiOkResponse({ type: [ToolDto] })
   async getAll() {
-    return await this.toolManager.getAll();
+    const tools = await this.toolManager.getAll();
+
+    return tools.map((tool) => ({
+      id: tool.id,
+      networkId: tool.networkId,
+      name: tool.name,
+      icon: tool.icon,
+      defaultParams: tool.defaultParams,
+      ui: tool.ui,
+    }));
   }
 }

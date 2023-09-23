@@ -44,6 +44,7 @@ export type WorkflowStep = {
 export type Tool = {
   id: string;
   name: string;
+  networkId: string;
   icon: string;
   defaultParams: any;
   ui: any;

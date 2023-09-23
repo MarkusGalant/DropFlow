@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { NavLink as RouterLink, useNavigate } from 'react-router-dom';
 
 import {
+  Avatar,
   Box,
   Button,
   Card,
@@ -28,10 +29,16 @@ import MoreActionMenu from '../../components/MoreActionMenu';
 
 type StepElementProps = {
   name: string;
+  icon: string;
 };
 
-const StepElement = ({ name }: StepElementProps) => {
-  return <>{name}</>;
+const StepElement = ({ name, icon }: StepElementProps) => {
+  return (
+    <Stack direction="row" alignItems="center" spacing={1}>
+      <Avatar src={icon} sx={{ height: 18, width: 'auto' }} />
+      <Box>{name}</Box>
+    </Stack>
+  );
 };
 
 const Workflows = () => {

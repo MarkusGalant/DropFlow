@@ -8,7 +8,15 @@ export class ToolDto {
 
   @ApiProperty()
   @IsString()
+  networkId: string;
+
+  @ApiProperty()
+  @IsString()
   name: string;
+
+  @ApiProperty()
+  @IsString()
+  icon: string;
 
   @ApiProperty()
   @IsObject()

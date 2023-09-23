@@ -32,7 +32,6 @@ import { AppRunner } from './app.runner';
 
 // tools
 import { ToolManager } from './tools/tool.manager';
-import { ZkSYncSyncSwapTool } from './tools/zksync-syncswap.tool';
 import { Seeder } from './app.seeder';
 
 @Module({
@@ -103,7 +102,6 @@ import { Seeder } from './app.seeder';
 
     // Tools
     ToolManager,
-    ZkSYncSyncSwapTool,
   ],
 })
 export class AppModule {}

@@ -1,13 +1,16 @@
 import { Injectable } from '@nestjs/common';
 
 import { Wallet } from 'src/models';
-import { ToolDto } from 'src/dtos';
+import { NetworkService } from 'src/services';
 
-import { ZkSYncSyncSwapTool } from './zksync-syncswap.tool';
+import { SyncSwapSwapTool } from './syncswap/syncswap.swap.tool';
+import { SyncSwapLiquidityTool } from './syncswap/syncswap.liquidity.tool';
 
 export type Tool = {
   id: string;
   name: string;
+  icon: string;
+  networkId: string;
   defaultParams: any;
   ui: any;
   execute(wallet: Wallet, params: any): Promise<any>;
@@ -16,28 +19,20 @@ export type Tool = {
 
 @Injectable()
 export class ToolManager {
-  constructor(private zkSYncSyncSwapTool: ZkSYncSyncSwapTool) {}
+  constructor(private networkService: NetworkService) {}
 
-  public tools: Tool[] = [this.zkSYncSyncSwapTool];
+  public getAll = async (): Promise<Tool[]> => {
+    const zkSync = await this.networkService.getOneByChainId(324);
 
-  private static mapTool(tool: Tool): ToolDto {
-    return {
-      id: tool.id,
-      name: tool.name,
-      defaultParams: tool.defaultParams,
-      ui: tool.ui,
-    };
-  }
+    return [new SyncSwapSwapTool(zkSync), new SyncSwapLiquidityTool(zkSync)];
+  };
 
   public async findOneOrFail({ where }: { where: { id: string } }) {
-    const tool = this.tools.find((it) => it.id === where.id);
+    const tools = await this.getAll();
+    const tool = tools.find((it) => it.id === where.id);
 
     if (!tool) throw new Error(`Not found tool`);
 
     return tool;
-  }
-
-  public async getAll() {
-    return this.tools.map(ToolManager.mapTool);
   }
 }

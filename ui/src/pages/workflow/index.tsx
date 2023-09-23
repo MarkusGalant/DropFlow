@@ -2,7 +2,16 @@ import { Fragment, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 //@mui
-import { Container, Grid, MenuItem, Stack, Typography } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Container,
+  Divider,
+  Grid,
+  MenuItem,
+  Stack,
+  Typography,
+} from '@mui/material';
 
 import MenuButton from '../../components/ButtonMenu';
 import WorkflowStep from './workflow-step';
@@ -13,6 +22,7 @@ import {
   useWorkflow,
   useUpdateWorkflow,
   useCreateExecution,
+  useNetworks,
 } from '../../hooks';
 import { Tool } from '../../types';
 
@@ -24,6 +34,7 @@ function Workflow() {
   const navigate = useNavigate();
 
   const { data: tools } = useTools();
+  const { data: networks } = useNetworks();
   const { data: walletGroups } = useWalletGroups();
 
   const { data: workflow } = useWorkflow(workflowId);
@@ -88,16 +99,37 @@ function Workflow() {
 
   const toolMenu = useMemo(
     () =>
-      tools.map((tool) => (
-        <MenuItem
-          key={tool.id}
-          sx={{ minWidth: 200 }}
-          onClick={() => addStep(tool)}
-        >
-          {tool.name}
-        </MenuItem>
-      )),
-    [workflow, tools],
+      networks.map((network) => {
+        const nTools = tools.filter((tool) => tool.networkId === network.id);
+
+        return nTools.length ? (
+          <>
+            <MenuItem
+              key={network.id}
+              sx={{ minWidth: 250, typography: 'subtitle1' }}
+            >
+              {network.name}
+            </MenuItem>
+            <Divider />
+            {nTools.map((tool) => (
+              <MenuItem
+                key={tool.id}
+                sx={{ pl: 4, justifyItems: 'center' }}
+                onClick={() => addStep(tool)}
+              >
+                <Avatar
+                  src={tool.icon}
+                  sx={{ py: 1, height: 32, width: 'auto', mr: 2 }}
+                />
+                {tool.name}
+              </MenuItem>
+            ))}
+          </>
+        ) : (
+          <></>
+        );
+      }),
+    [workflow, networks, tools],
   );
 
   const walletGroupsMenu = useMemo(
@@ -144,7 +176,15 @@ function Workflow() {
                 <Grid item xs={12} lg={6}>
                   <WorkflowStep
                     ui={tool.ui}
-                    title={tool.name}
+                    title={
+                      <Stack direction="row" alignItems="center" spacing={2}>
+                        <Avatar
+                          src={tool.icon}
+                          sx={{ height: 24, width: 'auto' }}
+                        />
+                        <Box>{tool.name}</Box>
+                      </Stack>
+                    }
                     params={step.params}
                     onParamsChange={(params) => changePrams(step.id, params)}
                     onAction={(action) => {
