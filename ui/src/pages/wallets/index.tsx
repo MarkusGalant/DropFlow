@@ -38,8 +38,8 @@ type BalanceProps = {
 
 const baseColumns: Column[] = [
   {
-    field: 'walletName',
-    header: 'Wallet',
+    field: 'name',
+    header: 'Name',
     align: 'left',
     renderCell: (name: string) => <>{name}</>,
   },
