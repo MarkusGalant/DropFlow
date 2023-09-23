@@ -61,7 +61,7 @@ const Networks = () => {
         </Box>
       </Container>
       {networkDialog.open && (
-        <NetworkDialog fullWidth maxWidth="sm" {...networkDialog.props} />
+        <NetworkDialog fullWidth maxWidth="xs" {...networkDialog.props} />
       )}
     </>
   );
